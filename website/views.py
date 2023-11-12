@@ -2,6 +2,8 @@
 
 from flask import Blueprint, render_template
 
+# we will Blueprints as a way to store our routes
+# Blueprint for our views file
 views = Blueprint('views', __name__)
 
 # home page
