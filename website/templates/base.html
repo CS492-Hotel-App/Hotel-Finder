@@ -13,29 +13,29 @@
             href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             crossorigin="anonymous"
         />
-        {# allows us to use 'blocks' which allows us to override certain html elements.. #}
-        <title>{% block title %}Home{% endblock %}</title>
-    </head>
 
+        <title>Hotel Finder</title>
+    </head>
+    
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Hotel Finder</a>
+            <a class="navbar-brand" href="index.html">Hotel Finder</a>
             <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar">
                 <span class="navbar-toggler-icon"> </span>
             </button>
              <div class="collapse navbar-collapse" id="navbar"> 
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link ml-auto" id="hotels" href="/hotels">Hotels</a>
-                    <a class="nav-item nav-link ml-auto" id="rooms" href="/rooms">Rooms</a>
-                    <a class="nav-item nav-link ml-auto" id="profile" href="/profile">Profile</a>
-                    <a class="nav-item nav-link ml-auto" id="login" href="/login">Login</a>
-                    <a class="nav-item nav-link ml-auto" id="sign-up" href="/sign-up">Sign Up</a>
+                    <a class="nav-item nav-link ml-auto" id="hotels" href="hotels.html">Hotels</a>
+                    <a class="nav-item nav-link ml-auto" id="rooms" href="rooms.html">Rooms</a>
+                    <a class="nav-item nav-link ml-auto" id="profile" href="profile.html">Profile</a>
+                    <a class="nav-item nav-link ml-auto" id="login" href="login.html">Login</a>
+                    <a class="nav-item nav-link ml-auto" id="sign-up" href="sign_up.html">Sign Up</a>
                 </div>
             </div>
         </nav>
 
         <div class="container">
-            {% block content %} {% endblock %}
+            <h1 class="text-center">Hotels Near You</h1>
         </div>
 
 
@@ -56,6 +56,7 @@
             crossorigin="anonymous"
         ></script>
 
-        {# to import out js file from our static folder #}
+
         <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
     </body>
+</html>
