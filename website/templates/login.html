@@ -1,62 +1,149 @@
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-            crossorigin="anonymous"
-        />
+<!DOCTYPE html>
+<html lang="en">
 
-        <title>Hotel Finder</title>
-    </head>
-    
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Hotel Finder</a>
-            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar">
-                <span class="navbar-toggler-icon"> </span>
-            </button>
-             <div class="collapse navbar-collapse" id="navbar"> 
-                <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link ml-auto" id="hotels" href="/hotels">Hotels</a>
-                    <a class="nav-item nav-link ml-auto" id="rooms" href="/rooms">Rooms</a>
-                    <a class="nav-item nav-link ml-auto" id="profile" href="/profile">Profile</a>
-                    <a class="nav-item nav-link ml-auto" id="login" href="/login">Login</a>
-                    <a class="nav-item nav-link ml-auto" id="sign-up" href="/sign-up">Sign Up</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Hotel Finder</title>
+    <script src="https://kit.fontawesome.com/41c47fdefa.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="../static/Images/Favicon.png">
+</head>
+
+<body>
+    <!-- Header with website title -->
+    <header>
+        <h1>Hotel Finder</h1>
+    </header>
+
+    <!-- NavBar -->
+    <nav id="navbar">
+        <a class="nav-item" id="hotels" href="/hotels">Home</a>
+        <a class="nav-item" id="hotels" href="/hotels">Hotels</a>
+        <a class="nav-item" id="rooms" href="/rooms">Rooms</a>
+        <a class="nav-item" id="profile" href="/profile">Profile</a>
+        <a class="nav-item active" id="login" href="/login">Login</a>
+    </nav>
+
+    <!-- LogIn/SignUp form -->
+    <div class="content">
+        <div class="formBox">
+            <h1 id="signuptitle">Log In</h1>
+            <form action="">
+                <div class="btn-field">
+                    <button type="button" id="signinBtn">Log In</button>
+                    <button type="button" class="disable" id="signupBtn">Sign up</button>
                 </div>
-            </div>
-        </nav>
+                <div class="input-group">
+                    <div class="input-field" id="nameField">
+                        <i class="fa-regular fa-user"></i>
+                        <input id="name" type="text" placeholder="Name">
+                    </div>
 
-        <div class="container">
-            <h1 class="text-center">Log In</h1>
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="passSubContainer">
+                        <p id="passwordClick">Lost Password <a href="#">Click Here!</a></p>
+                        <input id="subBtn" type="submit">
+                    </div>
+                </div>
+
+            </form>
         </div>
+    </div>
+    
+    <!-- Added footer with Team Members and last modified -->
+    <footer>
+        <p>Made by James, Donato, & Foram - Last Modified: </p> <span id="lastMod"></span>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
+
+    <script>
+
+        let signupBtn = document.getElementById("signupBtn");
+        let signinBtn = document.getElementById("signinBtn");
+        let nameField = document.getElementById("nameField");
+        let title = document.getElementById("signuptitle");
+        let formBox = document.querySelector(".formBox");
+        let subBtn = document.getElementById("subBtn");
+        let name = document.getElementById("name");
+
+        //Make sign up button hide name field
+        signinBtn.onclick = function () {
+            nameField.style.maxHeight = "0";
+            formBox.style.padding = "50px 60px 0px";
+            title.innerHTML = "Log In";
+            signupBtn.classList.add("disable");
+            signinBtn.classList.remove("disable");
+
+
+        }
+
+        //Makes name field not required when loging in
+        signinBtn.addEventListener('click', function () {
+            name.removeAttribute('required');
+
+        });
 
 
 
-        <script
-            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"
-        ></script>
+        signupBtn.onclick = function () {
+            nameField.style.maxHeight = "65px";
+            formBox.style.padding = "50px 60px 55px";
+            title.innerHTML = "Sign Up";
+            signupBtn.classList.remove("disable");
+            signinBtn.classList.add("disable");
 
+        }
 
-        <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
-    </body>
+        signupBtn.addEventListener('click', function () {
+            name.setAttribute('required', 'required');
+        });
+
+        function toggleReqName(required) {
+            name.required = required;
+        }
+
+        // Sticky NavBar
+
+        window.onscroll = function () { myFunction() };
+
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+
+        // Last Modified in Footer
+
+        let text = document.lastModified;
+        document.getElementById("lastMod").innerHTML = text;
+    </script>
+</body>
+
 </html>
