@@ -8,9 +8,44 @@
     <title>Hotel Finder</title>
     <script src="https://kit.fontawesome.com/41c47fdefa.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="../static/Images/Favicon.png">
+
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+    />
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"
+    />  
 </head>
 
 <body>
+    <!-- adding Flash to allow for message flashing -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category == 'error' %}
+                <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% else %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith%}
+
     <!-- Header with website title -->
     <header>
         <a class="homePage" href="/">Hotel Finder</a>
@@ -18,18 +53,28 @@
 
     <!-- NavBar -->
     <nav id="navbar">
-        <a class="nav-item" id="index" href="/">Home</a>
-        <a class="nav-item" id="hotels" href="/hotels">Hotels</a>
-        <a class="nav-item" id="rooms" href="/rooms">Rooms</a>
-        <a class="nav-item" id="profile" href="/profile">Profile</a>
-        <a class="nav-item active" id="login" href="/login">Login</a>
+        <!-- Added jinja syntax to display only certain links depending on if user is signed in -->
+        {% if user.is_authenticated %}
+            <a class="nav-item" id="index" href="/">Home</a>
+            <a class="nav-item" id="hotels" href="/hotels">Hotels</a>
+            <a class="nav-item" id="rooms" href="/rooms">Rooms</a>
+            <a class="nav-item" id="profile" href="/profile">Profile</a>
+            <a class="nav-item" id="logout" href="/logout">Logout</a>
+            {% else %}
+            <a class="nav-item" id="index" href="/">Home</a>
+            <a class="nav-item active" id="login" href="/login">Login</a>
+            <a class="nav-item" id="signUp" href="/sign-up">Sign Up</a>
+        {% endif %}
+
     </nav>
 
     <!-- LogIn/SignUp form -->
     <div class="content">
+
+        <!--
         <div class="formBox">
             <h1 id="signuptitle">Log In</h1>
-            <form action="">
+            <form method="POST" action="">
                 <div class="btn-field">
                     <button type="button" id="signinBtn">Log In</button>
                     <button type="button" class="disable" id="signupBtn">Sign up</button>
@@ -37,17 +82,17 @@
                 <div class="input-group">
                     <div class="input-field" id="nameField">
                         <i class="fa-regular fa-user"></i>
-                        <input id="name" type="text" placeholder="Name">
+                        <input id="name" name="name" type="text" placeholder="Name">
                     </div>
 
                     <div class="input-field">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="email" placeholder="Email" required>
+                        <input id="email" name="email" type="email" placeholder="Email" required>
                     </div>
 
                     <div class="input-field">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="Password" required>
+                        <input id="password" name="password" type="password" placeholder="Password" required>
                     </div>
 
                     <div class="passSubContainer">
@@ -57,8 +102,24 @@
                 </div>
 
             </form>
-        </div>
-    </div>
+        </div> -->
+
+        <form method="POST">
+            <h1 align="center">Login</h1>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div> 
+
+
     
     <!-- Added footer with Team Members and last modified -->
     <footer>
@@ -78,6 +139,7 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
 
+    <!--
     <script>
 
         let signupBtn = document.getElementById("signupBtn");
@@ -143,7 +205,7 @@
 
         let text = document.lastModified;
         document.getElementById("lastMod").innerHTML = text;
-    </script>
+    </script> -->
 </body>
 
 </html>

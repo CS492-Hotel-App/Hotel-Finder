@@ -1,7 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/style.css">
+        <title>Hotel Finder</title>
+        <script src="https://kit.fontawesome.com/41c47fdefa.js" crossorigin="anonymous"></script>
+        <link rel="icon" type="image/x-icon" href="../static/Images/Favicon.png">
+        
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -12,33 +18,87 @@
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             crossorigin="anonymous"
-        />
+        /> 
 
         <title>Hotel Finder</title>
     </head>
     
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Hotel Finder</a>
-            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar">
-                <span class="navbar-toggler-icon"> </span>
-            </button>
-             <div class="collapse navbar-collapse" id="navbar"> 
-                <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link ml-auto" id="hotels" href="/hotels">Hotels</a>
-                    <a class="nav-item nav-link ml-auto" id="rooms" href="/rooms">Rooms</a>
-                    <a class="nav-item nav-link ml-auto" id="profile" href="/profile">Profile</a>
-                    <a class="nav-item nav-link ml-auto" id="login" href="/login">Login</a>
-                    <a class="nav-item nav-link ml-auto" id="sign-up" href="/sign-up">Sign Up</a>
+        <!-- Allow for message flashing -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'error' %}
+                    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% else %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <header>
+            <a class="homePage" href="/">Hotel Finder</a>
+        </header>
+    
+        <!-- NavBar -->
+        <nav id="navbar">
+            {% if user.is_authenticated %}
+            <a class="nav-item" id="index" href="/">Home</a>
+            <a class="nav-item" id="hotels" href="/hotels">Hotels</a>
+            <a class="nav-item" id="rooms" href="/rooms">Rooms</a>
+            <a class="nav-item" id="profile" href="/profile">Profile</a>
+            <a class="nav-item" id="logout" href="/logout">Logout</a>
+            {% else %}
+            <a class="nav-item" id="index" href="/">Home</a>
+            <a class="nav-item" id="login" href="/login">Login</a>
+            <a class="nav-item active" id="signUp" href="/sign-up">Sign Up</a>
+            {% endif %}
         </nav>
 
-        <div class="container">
-            <h1 class="text-center">Sign Up</h1>
+        <div class="content">
+            <form method="POST">
+                <h1 class="text-center">Sign Up</h1>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Password (Confirm)</label>
+                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password" />
+                </div>
+                <div class="form-group">
+                    <label for="email">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" />
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
 
 
+        <footer>
+            <p>Made by James, Donato, & Foram - Last Modified: </p> <span id="lastMod"></span>
+        </footer>
+    
+        <script>
+            let text = document.lastModified;
+            document.getElementById("lastMod").innerHTML = text;
+        </script>
 
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
