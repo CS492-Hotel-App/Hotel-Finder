@@ -31,7 +31,7 @@ def login():
 
 # logout
 @auth.route('/logout')
-@login_required         # user cannot access this page unless they are logged in 
+# @login_required         # user cannot access this page unless they are logged in 
 def logout():
     logout_user()
     return redirect(url_for('views.home'))

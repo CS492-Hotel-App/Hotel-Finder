@@ -16,7 +16,7 @@ def home():
 
 # hotels page
 @views.route('/hotels', methods=["GET", "POST"])
-@login_required
+# @login_required
 def hotels():
     # create a list of the hotels so that we can pass in this list into our render_template() function so we can access it in hotels.html...
     hotels = []
@@ -96,7 +96,7 @@ def delete_hotel():
 
 # rooms page
 @views.route('/rooms', methods=["GET", "POST"])
-@login_required
+# @login_required
 def rooms():
     rooms = []
     
@@ -120,7 +120,7 @@ def delete_room():
 
 # profile page
 @views.route('/profile')
-@login_required
+# @login_required
 def profile():
     return render_template("profile.html", user=current_user)
 
