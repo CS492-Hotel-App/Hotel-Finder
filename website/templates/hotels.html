@@ -8,6 +8,17 @@
     <title>Hotel Finder</title>
     <script src="https://kit.fontawesome.com/41c47fdefa.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="../static/Images/Favicon.png">
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+    />
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"
+    /> 
 </head>
 
 <body>
@@ -35,8 +46,51 @@
 
 
     <div class="content">
+
+    <!--
+        
+    <form method="POST">
+        <h3 align="center">Add a Hotel</h3>
+        <div class="form-group">
+            <label for="hotel_name">Hotel Name</label>
+            <input type="text" class="form-control" id="hotel_name" name="hotel_name" placeholder="Hotel name"/>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Location"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary">Add Hotel</button>
+    </form> -->
+
         <h1 class="text-center">Hotels Near You</h1>
+
+        <ul class="list-group list-group-flush" id="hotels">
+            {% for hotel in hotels %}                          <!-- had to pass in a 'hotels' list variable into our render_temp function -->
+            <li class="list-group-item">
+                
+                <a href="/rooms">
+                {{ hotel.hotel_name }}
+                </a>
+                <!-- {{ hotel.id }} -->
+
+                <br/>
+                {{ hotel.location }}
+                </br>
+                {{ hotel.description }}
+
+                <!-- Button to delete a hotel... dont want this as of now...
+                <button type="button" class="close" onClick="delete_hotel({{ hotel.id }})">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+            </li>
+            {% endfor %}
     </div>
+
 
     <footer>
         <p>Made by James, Donato, & Foram - Last Modified: </p> <span id="lastMod"></span>
