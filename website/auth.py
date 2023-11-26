@@ -31,7 +31,7 @@ def login():
 
 # logout
 @auth.route('/logout')
-# @login_required         # user cannot access this page unless they are logged in 
+@login_required         # user cannot access this page unless they are logged in 
 def logout():
     logout_user()
     return redirect(url_for('views.home'))
@@ -58,7 +58,7 @@ def sign_up():
             flash('Password must be at least five characters', category='error')
         else:
             # entered all valid data, add user to db... hash the users password so it's not stored in plain text
-            new_user = User(email=email, name=name, password=generate_password_hash(password1, method='sha256'))
+            new_user = User(email=email, name=name, password=generate_password_hash(password1, method='pbkdf2:sha256'))
             
             db.session.add(new_user)
             db.session.commit()
