@@ -9,69 +9,60 @@
     <script src="https://kit.fontawesome.com/41c47fdefa.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="../static/Images/Favicon.png">
 
-    <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-        crossorigin="anonymous"
-    />
-    <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        crossorigin="anonymous"
-    />  
+
 </head>
 
 <body>
-    <!-- adding Flash to allow for message flashing -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
+    <main>
+        <!-- adding Flash to allow for message flashing -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
         {% for category, message in messages %}
-            {% if category == 'error' %}
-                <div class="alert alert-danger alter-dismissable fade show" role="alert">
-                    {{message}}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% else %}
-                <div class="alert alert-success alter-dismissable fade show" role="alert">
-                    {{message}}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    {% endwith%}
-
-    <!-- Header with website title -->
-    <header>
-        <a class="homePage" href="/">Hotel Finder</a>
-    </header>
-
-    <!-- NavBar -->
-    <nav id="navbar">
-        <!-- Added jinja syntax to display only certain links depending on if user is signed in -->
-        {% if user.is_authenticated %}
-        <a class="nav-item" id="index" href="/">Home</a>
-        <a class="nav-item" id="hotels" href="/hotels">Hotels</a>
-        <a class="nav-item" id="rooms" href="/rooms">Rooms</a>
-        <a class="nav-item" id="profile" href="/profile">Profile</a>
-        <a class="nav-item" id="logout" href="/logout">Logout</a>
+        {% if category == 'error' %}
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         {% else %}
-        <a class="nav-item" id="index" href="/">Home</a>
-        <a class="nav-item active" id="login" href="/login">Login</a>
-        <a class="nav-item" id="signUp" href="/sign-up">Sign Up</a>
+        <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endwith%}
 
-    </nav>
+        <!-- Header with website title -->
+        <header>
+            <a class="homePage" href="/">Hotel Finder</a>
+        </header>
 
-    <!-- LogIn/SignUp form -->
-    <div class="content">
+        <!-- NavBar -->
+        <nav id="navbar">
+            <!-- Added jinja syntax to display only certain links depending on if user is signed in -->
+            <<<<<<< HEAD {% if user.is_authenticated %}=======>>>>>>> 05ba09c427ae1c05fd658157a3a05ebf39d28b07
+                <a class="nav-item active" id="index" href="/">Home</a>
+                <a class="nav-item" id="hotels" href="/hotels">Hotels</a>
+                <a class="nav-item" id="rooms" href="/rooms">Rooms</a>
+                <a class="nav-item" id="profile" href="/profile">Profile</a>
+                <a class="nav-item" id="logout" href="/logout">Logout</a>
+                <<<<<<< HEAD {% else %}=======>>>>>>> 05ba09c427ae1c05fd658157a3a05ebf39d28b07
+                    <a class="nav-item" id="index" href="/">Home</a>
+                    <a class="nav-item active" id="login" href="/login">Login</a>
+                    <a class="nav-item" id="signUp" href="/sign-up">Sign Up</a>
+                    {% endif %}
 
-        <!--
+
+        </nav>
+        <!-- LogIn/SignUp form -->
+        <div class="container">
+
+            <!--
         <div class="formBox">
             <h1 id="signuptitle">Log In</h1>
             <form method="POST" action="">
@@ -104,27 +95,30 @@
             </form>
         </div> -->
 
-        <form method="POST">
-            <h1 align="center">Login</h1>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
-            </div>
-            <br/>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </div> 
+            <form method="POST">
+                <h1 align="center">Login</h1>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Enter password" />
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
 
 
-    
-    <!-- Added footer with Team Members and last modified -->
-    <footer>
-        <p>Made by James, Donato, & Foram - Last Modified: </p> <span id="lastMod"></span>
-    </footer>
+
+        <!-- Added footer with Team Members -->
+        <footer>
+            <p>Made by James, Donato, & Foram</p>
+        </footer>
+
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -138,6 +132,28 @@
 
 
     <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
+
+    <script>
+        // Sticky NavBar
+
+        window.onscroll = function () { myFunction() };
+
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+
+        // Last Modified in Footer
+
+        let text = document.lastModified;
+        document.getElementById("lastMod").innerHTML = text;
+    </script>
 
     <!--
     <script>

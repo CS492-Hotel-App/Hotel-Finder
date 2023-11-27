@@ -8,48 +8,54 @@
     <title>Hotel Finder</title>
     <script src="https://kit.fontawesome.com/41c47fdefa.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="../static/Images/Favicon.png">
+
 </head>
 
 <body>
-    <!-- Header with website title -->
-    <header>
-        <a class="homePage" href="/">Hotel Finder</a>
-    </header>
+
+    <main>
+        <!-- Header with website title -->
+        <header>
+            <a class="homePage" href="/">Hotel Finder</a>
+        </header>
 
     <!-- NavBar -->
     <nav id="navbar">
         <!-- Added jinja syntax to display only certain links depending on if user is signed in -->
-<<<<<<< HEAD
         {% if user.is_authenticated %}
-=======
->>>>>>> 05ba09c427ae1c05fd658157a3a05ebf39d28b07
         <a class="nav-item active" id="index" href="/">Home</a>
         <a class="nav-item" id="hotels" href="/hotels">Hotels</a>
         <a class="nav-item" id="rooms" href="/rooms">Rooms</a>
         <a class="nav-item" id="profile" href="/profile">Profile</a>
         <a class="nav-item" id="logout" href="/logout">Logout</a>
-<<<<<<< HEAD
         {% else %}
-=======
-        
->>>>>>> 05ba09c427ae1c05fd658157a3a05ebf39d28b07
-        <a class="nav-item active" id="index" href="/">Home</a>
+        <a class="nav-item" id="index" href="/">Home</a>
         <a class="nav-item" id="login" href="/login">Login</a>
         <a class="nav-item" id="signUp" href="/sign-up">Sign Up</a>
         {% endif %}
-
-
     </nav>
 
 
-    <div class="content">
-        <h1 class="text-center">Home Page </h1>
-    </div>
+        <div class="container">
+            <p>
+                Find the perfect hotel for your next trip with our easy-to-use hotel finder.
+                Browse through a wide selection of hotels, compare prices, and book the best
+                accommodation for your stay.
+            </p>
+            <p>
+                Whether it's a relaxing getaway, a business trip, or an adventure-filled vacation,
+                we've got you covered. Start your search now and experience the comfort and
+                convenience of finding the ideal hotel with us.
+            </p>
+            <a href="" class="cta-button">Log In Now!</a>
+        </div>
 
-    <footer>
-        <p>Made by James, Donato, & Foram - Last Modified: </p> <span id="lastMod"></span>
-    </footer>
+        <footer>
+            <p>Made by James, Donato, & Foram</p>
+        </footer>
 
+    </main>
+    
     <script>
         let text = document.lastModified;
         document.getElementById("lastMod").innerHTML = text;
@@ -68,5 +74,6 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
 </body>
+
 
 </html>
