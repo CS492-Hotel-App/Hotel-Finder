@@ -188,7 +188,7 @@ button:hover {
 
 
 .hotelList {
-    display: flex;
+    
     flex-wrap: wrap;
     padding: 20px;
 }
@@ -201,8 +201,8 @@ button:hover {
     padding: 20px;
     margin: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
 }
 
 .hotelImage img {
@@ -229,4 +229,70 @@ ul {
 
 li {
     display: inline-block; 
+}
+
+/* Rooms Page */
+
+.rooms {
+    display: block;
+}
+
+
+.room-list {
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+
+.room-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    
+}
+
+
+.room-details h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.room-details p {
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+
+.room-action button {
+    align-self: center; 
+    margin-top: 20px;
+}
+
+
+a.btn {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    vertical-align: middle; 
+    line-height: 2.2; 
+    text-decoration: none;
+}
+.room-action a.btn-secondary.disabled {
+    cursor: not-allowed;
+    opacity: 0.6; 
+    text-decoration: none;
+    pointer-events: none;
 }
