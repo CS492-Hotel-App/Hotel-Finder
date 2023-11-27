@@ -53,7 +53,7 @@ header a{
     text-decoration: none;
     font-size: 17px;
     width: 100px;
-    
+
 }
 
 #navbar a:hover {
@@ -99,9 +99,8 @@ p {
 }
 
 footer {
-    position: absolute;
     bottom: 0;
-    width: 80%;
+    width: 100%;
     background-color: #333;
     text-align: center;
     height: 60px;
@@ -138,17 +137,17 @@ footer p {
 
 /* Login Page formatting */
 
-#loginContent {
+.formContent {
     background-color: #fff;
+    border: 1px solid #ddd;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
     font-size: 24px;
 }
 
-#loginContent h1 {
-    margin: 30px 30px 60px 30px;
+.formTitle {
+    margin: 0px 30px 60px 30px;
     color: #274156;
 }
 
@@ -179,4 +178,55 @@ button {
 
 button:hover {
     background-color: #2980b9;
+}
+
+/* Hotel Page */
+
+.hotel {
+    display: block;
+}
+
+
+.hotelList {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+
+.hotelCard {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    height: 200px;
+}
+
+.hotelImage img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.hotelDetails h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.hotelDetails p {
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+
+ul {
+    list-style: none; 
+    padding: 0;
+}
+
+li {
+    display: inline-block; 
 }

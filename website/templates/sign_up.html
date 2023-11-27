@@ -7,23 +7,11 @@
         <title>Hotel Finder</title>
         <script src="https://kit.fontawesome.com/41c47fdefa.js" crossorigin="anonymous"></script>
         <link rel="icon" type="image/x-icon" href="../static/Images/Favicon.png">
-        
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-            crossorigin="anonymous"
-        /> 
-
         <title>Hotel Finder</title>
     </head>
     
     <body>
+        <main>
         <!-- Allow for message flashing -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -64,45 +52,41 @@
             <a class="nav-item" id="login" href="/login">Login</a>
             <a class="nav-item active" id="signUp" href="/sign-up">Sign Up</a>
             {% endif %}
-
-            <a class="nav-item" id="index" href="/">Home</a>
-            <a class="nav-item" id="login" href="/login">Login</a>
-            <a class="nav-item active" id="signUp" href="/sign-up">Sign Up</a>
         </nav>
 
-        <div class="content">
+        <div class="container">
+            <div class="formContent">
             <form method="POST">
-                <h1 class="text-center">Sign Up</h1>
+                <h1 class="formTitle">Sign Up</h1>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" />
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password" />
+                    <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter Password" />
                 </div>
                 <div class="form-group">
                     <label for="email">Password (Confirm)</label>
-                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password" />
+                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" />
                 </div>
                 <div class="form-group">
                     <label for="email">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" />
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" />
                 </div>
                 <br/>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+    </div>
 
 
         <footer>
-            <p>Made by James, Donato, & Foram - Last Modified: </p> <span id="lastMod"></span>
+            <p>Made by James, Donato, & Foram</p>
         </footer>
     
-        <script>
-            let text = document.lastModified;
-            document.getElementById("lastMod").innerHTML = text;
-        </script>
+    </main>
+
 
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
