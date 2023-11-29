@@ -37,36 +37,16 @@
 
     <div class="container hotel">
 
-    <!--
-        
-    <form method="POST">
-        <h3 align="center">Add a Hotel</h3>
-        <div class="form-group">
-            <label for="hotel_name">Hotel Name</label>
-            <input type="text" class="form-control" id="hotel_name" name="hotel_name" placeholder="Hotel name"/>
-        </div>
-        <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="Location"/>
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
-        </div>
-        <br/>
-        <button type="submit" class="btn btn-primary">Add Hotel</button>
-    </form> -->
-
         <h1 id="hotelPageTitle">Hotels Near You</h1>
 
         <div class="hotelList">
             <ul class="list-group list-group-flush" id="hotels">
+                {% set count = namespace(value=0) %}        <!-- created count variable to increment the images -->
                 {% for hotel in hotels %}
                 <li class="list-group-item">
                     <div class="hotelCard">
                         <div class="hotelImage">
-                            <!-- Image placeholder -->
-                            <img src="" alt="Image Placeholder">
+                            <img src={{ hotel_images[count.value] }} alt="Image Placeholder">
                         </div>
                         <div class="hotelDetails">
                             <h3>
@@ -74,15 +54,16 @@
                                     {{ hotel.hotel_name }}
                                 </a>
                             </h3>
+                            <!-- <p>{{ hotel.id }} </p> -->
                             <p>{{ hotel.location }}</p>
                             <p>{{ hotel.description }}</p>
                         </div>
                     </div>
-                </li>
+                </li>           
+                {% set count.value = count.value + 1 %}     
                 {% endfor %}
             </ul>
         </div>
-        
         
     </div>
 

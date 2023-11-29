@@ -47,7 +47,11 @@
                 we've got you covered. Start your search now and experience the comfort and
                 convenience of finding the ideal hotel with us.
             </p>
+            {% if user.is_authenticated %}
+            <a href="/hotels" class="cta-button">Explore Hotels Now!</a>
+            {% else %}
             <a href="/login" class="cta-button">Log In Now!</a>
+            {% endif %}
         </div>
 
         <footer>
