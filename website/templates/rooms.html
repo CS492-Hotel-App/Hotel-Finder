@@ -38,12 +38,14 @@
 
         <div class="container rooms">
             <h1 class="text-center">Rooms</h1>
+            <h1> {{ hotel_name }} </h1>
             <div class="text-center">
                 <a href="#" class="btn btn-primary">Add Room</a>
 
             </div>
             <div class="room-list">
                 <ul class="list-group list-group-flush" id="rooms">
+                    {% set count = namespace(value=0) %}
                     {% for room in rooms %}
                     <li class="list-group-item">
                         <div class="room-card">
@@ -51,16 +53,35 @@
                                 <h3>Room Type: {{ room.room_type }}</h3>
                                 <p>Price: ${{ room.price }}</p>
                                 <p>Room Availability: {{ room.availability }}</p>
+                                <p>ID: {{ room.id }} </p>
+                                <p>From: {{hotel_names[count.value]}}, 
+                                    {% if hotel_names[count.value] == 'Grand Horizon Hotel' or hotel_names[count.value] == 'Crown Jewel Hotel' %}    
+                                    Chicago, IL
+                                    {% elif hotel_names[count.value] == 'Royal Crest Suites' or hotel_names[count.value] == 'Metropolitan Grandeur' or hotel_names[count.value] == 'Central Park Plaza' %}
+                                    New York, NY
+                                    {% elif hotel_names[count.value] == 'Harmony Haven Hotel' %}
+                                    Los Angeles, CA
+                                    {% elif hotel_names[count.value] == 'Tranquil Oasis Inn' %}
+                                    Miami, FL
+                                    {% elif hotel_names[count.value] == 'Majestic Pines Resort' %}
+                                    Denver, CO
+                                    {% elif hotel_names[count.value] == 'Golden Gate Grand Hotel' %}
+                                    San Francisco, CA
+                                    {% elif hotel_names[count.value] == 'Imperial Gardens Hotel' %}
+                                    Tampa Bay, FL
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="room-action">
                                 {% if room.availability == 'Yes' %}
-                                <button type="button" class="btn btn-primary">Book Room</button>
+                                <a href="/booking" class="btn btn-primary">Book Room</a>
                                 {% else %}
                                 <a href="#" class="btn btn-secondary disabled">Book Room</a>
                                 {% endif %}
                             </div>
                         </div>
                     </li>
+                    {% set count.value = count.value + 1 %}
                     {% endfor %}
                 </ul>
             </div>

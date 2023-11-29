@@ -31,9 +31,7 @@ def hotels():
     '../static/Images/hotel8.jpg',
     '../static/Images/hotel9.jpg',
     '../static/Images/hotel10.jpg']
-    
-    i = 0
-    
+        
     # to delete the hotels from database.. (for testing purposes...)
     # for hotel in db.session.query(Hotel):
     #     db.session.delete(hotel)
@@ -86,7 +84,7 @@ def hotels():
         
         db.session.commit()
 
-    return render_template("hotels.html", user=current_user, hotels=hotels, hotel_images=hotel_images, i=i)
+    return render_template("hotels.html", user=current_user, hotels=hotels, hotel_images=hotel_images)
 
 # new route to delete individual hotels
 @views.route('/delete-hotel', methods=["POST"])
@@ -108,23 +106,109 @@ def delete_hotel():
 def rooms():
     rooms = []
     
-    room1 = Room(room_type="Standard", price=400, availability='Yes', hotel_id=1)
-    rooms.append(room1)
-    room2 = Room(room_type="Deluxe", price=600, availability="Yes", hotel_id=2)
-    rooms.append(room2)
-    room3 = Room(room_type="Suite", price=800, availability="No", hotel_id=6)
-    rooms.append(room3)
-    db.session.add(room1)
-    db.session.add(room2)
-    db.session.add(room3)
+    # to delete the rooms from database.. (for testing purposes...)
+    # for room in db.session.query(Room):
+    #     db.session.delete(room)
+
+    # if the room objects are stored in the database, grab them and append them to our hotels list
+    for room in db.session.query(Room):
+        rooms.append(room)
+        
+    if rooms == []:
+        # Grand Horizon, Chi $$$
+        room1 = Room(room_type='Standard', price=150, availability='Yes', hotel_id=1)
+        rooms.append(room1)
+        room2 = Room(room_type='Deluxe', price=400, availability='Yes', hotel_id=1)
+        rooms.append(room2)
+        room3 = Room(room_type='Suite', price=800, availability='No', hotel_id=1)
+        rooms.append(room3)
+        
+        # Royal Crest, NY $$
+        room4 = Room(room_type='Standard', price=100, availability='Yes', hotel_id=2)
+        rooms.append(room4)
+        room5 = Room(room_type='Deluxe', price=200, availability='Yes', hotel_id=2)
+        rooms.append(room5)
+    
+        # Harmony, LA $$$
+        room6 = Room(room_type='Standard', price=200, availability='Yes', hotel_id=3)
+        rooms.append(room6)
+        room7 = Room(room_type='Deluxe', price=350, availability='Yes', hotel_id=3)
+        rooms.append(room7)
+        room8 = Room(room_type='Suite', price=800, availability='Yes', hotel_id=3)
+        rooms.append(room8)
+        
+        # Metro, NY $$$
+        room9 = Room(room_type='Standard', price=200, availability='Yes', hotel_id=4)
+        rooms.append(room9)
+        room10 = Room(room_type='Deluxe', price=400, availability='Yes', hotel_id=4)
+        rooms.append(room10)
+        room11 = Room(room_type='Suite', price=800, availability='No', hotel_id=4)
+        rooms.append(room11)
+        
+        # Tranquil, Miami $$$
+        room12 = Room(room_type='Standard', price=200, availability='Yes', hotel_id=5)
+        rooms.append(room12)
+        room13 = Room(room_type='Deluxe', price=400, availability='Yes', hotel_id=5)
+        rooms.append(room13)
+        room14 = Room(room_type='Suite', price=800, availability='No', hotel_id=5)
+        rooms.append(room14)
+        
+        # Majestic, CO $$
+        room15 = Room(room_type='Standard', price=100, availability='Yes', hotel_id=6)
+        rooms.append(room15)
+        room16 = Room(room_type='Deluxe', price=150, availability='Yes', hotel_id=6)
+        rooms.append(room16)
+        
+        # Crown, Chi $$
+        room17 = Room(room_type='Standard', price=100, availability='Yes', hotel_id=7)
+        rooms.append(room17)
+        room18 = Room(room_type='Deluxe', price=150, availability='Yes', hotel_id=7)
+        rooms.append(room18)
+        
+        # Central, NY $$
+        room19 = Room(room_type='Standard', price=100, availability='Yes', hotel_id=8)
+        rooms.append(room19)
+        room20 = Room(room_type='Deluxe', price=150, availability='Yes', hotel_id=8)
+        rooms.append(room20)
+        
+        # Golden, SF $$
+        room21 = Room(room_type='Standard', price=100, availability='Yes', hotel_id=9)
+        rooms.append(room21)
+        room22 = Room(room_type='Deluxe', price=150, availability='Yes', hotel_id=9)
+        rooms.append(room22)
+        
+        # Imperial, Tampa $
+        room23 = Room(room_type='Standard', price=50, availability='Yes', hotel_id=10)
+        rooms.append(room23)
+        
+    for room in rooms:
+        db.session.add(room)
+        # db.session.commit()
+        
+    hotel_names = []
+    for room in rooms:
+        hotel_name = get_hotel_name(room.hotel_id)
+        hotel_names.append(hotel_name)
+
     db.session.commit()
     
-    return render_template("rooms.html", user=current_user, rooms=rooms)
+    return render_template("rooms.html", user=current_user, rooms=rooms, hotel_names=hotel_names)
+
+# function to get the hotel name of each room
+def get_hotel_name(hotel_id):
+    hotel_name = Hotel.query.filter_by(id=hotel_id).first().hotel_name
+    return hotel_name
 
 # delete a room
 @views.route('/delete-room', methods=["POST"])
 def delete_room():
     pass
+
+# booking form page
+@views.route('/booking', methods=["GET", "POST"])
+def booking():
+    
+    return render_template("booking.html", user=current_user)
 
 # profile page
 @views.route('/profile')
