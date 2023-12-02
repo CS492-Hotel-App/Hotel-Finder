@@ -25,8 +25,8 @@ class Room(db.Model):
     
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    checkInDate = db.Column(db.DateTime(timezone=True))
-    checkOutDate = db.Column(db.DateTime(timezone=True))
+    check_in_date = db.Column(db.DateTime(timezone=True))
+    check_out_date = db.Column(db.DateTime(timezone=True))
     hotel_name = db.Column(db.String(1000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     

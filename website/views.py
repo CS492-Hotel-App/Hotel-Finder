@@ -1,11 +1,14 @@
 # file where we'll store most of our views/routes
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Hotel, Room
+from .models import Hotel, Room, Booking
 from . import db 
 import json
 
-# we will Blueprints as a way to store our routes
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
+
+# we will use Blueprints as a way to store our routes together
 # Blueprint for our views file
 views = Blueprint('views', __name__)
 
@@ -87,18 +90,18 @@ def hotels():
     return render_template("hotels.html", user=current_user, hotels=hotels, hotel_images=hotel_images)
 
 # new route to delete individual hotels
-@views.route('/delete-hotel', methods=["POST"])
-def delete_hotel():
-    hotel = json.loads(request.data)
-    hotelId = hotel['hotelId']
-    hotel = Hotel.query.get(hotelId)        # look for the hotel with that id..
+# @views.route('/delete-hotel', methods=["POST"])
+# def delete_hotel():
+#     hotel = json.loads(request.data)
+#     hotelId = hotel['hotelId']
+#     hotel = Hotel.query.get(hotelId)        # look for the hotel with that id..
     
-    # if hotel exists.. delete it from db
-    if hotel:
-        db.session.delete(hotel)
-        db.session.commit()
+#     # if hotel exists.. delete it from db
+#     if hotel:
+#         db.session.delete(hotel)
+#         db.session.commit()
         
-    return jsonify({})                      # return nothing
+#     return jsonify({})                      # return nothing
 
 # rooms page
 @views.route('/rooms', methods=["GET", "POST"])
@@ -194,27 +197,62 @@ def rooms():
     
     return render_template("rooms.html", user=current_user, rooms=rooms, hotel_names=hotel_names)
 
+# delete a room
+# @views.route('/delete-room', methods=["POST"])
+# def delete_room():
+#     pass
+
+# booking form page
+@views.route('/booking', methods=["GET", "POST"])
+def booking():
+    url = request.url
+    parsed = urlparse(url)
+    value = parse_qs(parsed.query)['variable'][0]
+    
+    # getting room/hotel information from the room id
+    hotel_name = get_hotel_from_room_id(value)
+    hotel_location = get_location_from_room_id(value)
+    room_type = get_room_type(value)
+    price = get_room_price(value)
+    
+    return render_template("booking.html", user=current_user, value=value, hotel_name=hotel_name, hotel_location=hotel_location, room_type=room_type, price=price)
+
+
+# Helper Functions...
+
 # function to get the hotel name of each room
 def get_hotel_name(hotel_id):
     hotel_name = Hotel.query.filter_by(id=hotel_id).first().hotel_name
     return hotel_name
 
-# delete a room
-@views.route('/delete-room', methods=["POST"])
-def delete_room():
-    pass
+def get_hotel_location(hotel_id):
+    hotel_location = Hotel.query.filter_by(id=hotel_id).first().location
+    return hotel_location
 
-# booking form page
-@views.route('/booking', methods=["GET", "POST"])
-def booking():
-    
-    return render_template("booking.html", user=current_user)
+# function to get the name of hotel from the id...
+def get_hotel_from_room_id(room_id):
+    hotel_id = Room.query.filter_by(id=room_id).first().hotel_id
+    hotel_name = get_hotel_name(hotel_id)
+    return hotel_name
+def get_location_from_room_id(room_id):
+    hotel_id = Room.query.filter_by(id=room_id).first().hotel_id
+    hotel_location = get_hotel_location(hotel_id)
+    return hotel_location
+def get_room_type(room_id):
+    room_type = Room.query.filter_by(id=room_id).first().room_type
+    return room_type
+def get_room_price(room_id):
+    price = Room.query.filter_by(id=room_id).first().price
+    return price
+
+
+
+
+
+
 
 # profile page
 @views.route('/profile')
 @login_required
 def profile():
     return render_template("profile.html", user=current_user)
-
-
-
