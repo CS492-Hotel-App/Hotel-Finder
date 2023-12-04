@@ -301,3 +301,26 @@ a.btn {
     text-decoration: none;
     pointer-events: none;
 }
+
+/* Booking Page */
+
+h3 {
+    margin: 50px 30px 30px 30px;
+    font-size: 24px;
+}
+
+.booking {
+    margin: 25px 200px 25px 200px;
+}
+
+#bookingHotel {
+    color: #3f6a8d;
+}
+
+#bookingCity {
+    color: #3f6a8d;
+}
+
+.bookingTitle {
+    margin-bottom: 25px;
+}
