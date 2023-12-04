@@ -324,3 +324,10 @@ h3 {
 .bookingTitle {
     margin-bottom: 25px;
 }
+
+/* Profile Page */
+
+
+.profile {
+    display: block;
+}
