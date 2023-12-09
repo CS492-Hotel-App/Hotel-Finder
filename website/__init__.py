@@ -22,7 +22,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     
-    from .models import User, Hotel, Room
+    from .models import User, Hotel, Room, Booking
     
     # creating the db
     with app.app_context():

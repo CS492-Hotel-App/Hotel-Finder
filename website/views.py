@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from .models import Hotel, Room, Booking
 from . import db 
 import json
+import datetime
 
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
@@ -215,6 +216,27 @@ def booking():
     room_type = get_room_type(value)
     price = get_room_price(value)
     
+    if request.method == 'POST':
+        checkInDate = request.form.get('checkInDate')
+        checkOutDate = request.form.get('checkOutDate')
+        hotel_name = hotel_name
+        
+        in_year = int(checkInDate[:4])
+        in_month = int(checkInDate[5:7])
+        in_day = int(checkInDate[8:])
+        out_year = int(checkOutDate[:4])
+        out_month = int(checkOutDate[5:7])
+        out_day = int(checkOutDate[8:])
+        
+        # check_in_date=datetime.date(int(checkInDate[:4]),int(checkInDate[5:7]), int(checkInDate[8:])), check_out_date=datetime.date(int(checkOutDate[:4]), int(checkOutDate[5:7]), int(checkOutDate[8:]))
+        if checkInDate is None or checkOutDate is None:
+            flash('Enter valid dates.')
+        else:
+            new_booking = Booking(check_in_date=datetime.date(in_year,in_month,in_day), check_out_date=datetime.date(out_year,out_month,out_day), hotel_name=hotel_name, user_id=current_user.id)
+            db.session.add(new_booking)
+            db.session.commit()
+            flash('Booking successful')
+    
     return render_template("booking.html", user=current_user, value=value, hotel_name=hotel_name, hotel_location=hotel_location, room_type=room_type, price=price)
 
 
@@ -255,4 +277,20 @@ def get_room_price(room_id):
 @views.route('/profile')
 @login_required
 def profile():
-    return render_template("profile.html", user=current_user)
+    return render_template("profile.html", user=current_user, bookings=current_user.bookings)
+
+# remove booking
+@views.route('/remove-booking', methods=["POST"])
+def remove_booking():
+    booking = json.loads(request.data)
+    bookingId = booking['bookingId']
+    booking = Booking.query.get(bookingId)
+    
+    # to actually delete if exists..
+    if booking:
+        if booking.user_id == current_user.id:
+            db.session.delete(booking)
+            db.session.commit()
+            
+    return jsonify({})
+

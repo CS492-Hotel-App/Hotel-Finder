@@ -26,3 +26,13 @@ function getRoomId() {
 
     alert(myVariable)
 }
+
+// function to remove booking from user's profile
+function removeBooking(bookingId) {
+    fetch("/remove-booking", {
+        method: "POST",
+        body: JSON.stringify({bookingId: bookingId}),
+    }).then((_res) => {
+        window.location.href="/profile"
+    })
+}
