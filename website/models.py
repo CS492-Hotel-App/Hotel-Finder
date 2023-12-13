@@ -18,7 +18,7 @@ class Hotel(db.Model):
     
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    room_type = db.Column(db.String(1000))          # standard, deluxe, suite OR single, double, suite...?
+    room_type = db.Column(db.String(1000))
     price = db.Column(db.Integer)
     availability = db.Column(db.String(1000))
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))     # foreign key for Room class

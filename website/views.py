@@ -1,5 +1,5 @@
 # file where we'll store most of our views/routes
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Hotel, Room, Booking
 from . import db 
@@ -89,20 +89,6 @@ def hotels():
         db.session.commit()
 
     return render_template("hotels.html", user=current_user, hotels=hotels, hotel_images=hotel_images)
-
-# new route to delete individual hotels
-# @views.route('/delete-hotel', methods=["POST"])
-# def delete_hotel():
-#     hotel = json.loads(request.data)
-#     hotelId = hotel['hotelId']
-#     hotel = Hotel.query.get(hotelId)        # look for the hotel with that id..
-    
-#     # if hotel exists.. delete it from db
-#     if hotel:
-#         db.session.delete(hotel)
-#         db.session.commit()
-        
-#     return jsonify({})                      # return nothing
 
 # rooms page
 @views.route('/rooms', methods=["GET", "POST"])
@@ -198,11 +184,6 @@ def rooms():
     
     return render_template("rooms.html", user=current_user, rooms=rooms, hotel_names=hotel_names)
 
-# delete a room
-# @views.route('/delete-room', methods=["POST"])
-# def delete_room():
-#     pass
-
 # booking form page
 @views.route('/booking', methods=["GET", "POST"])
 def booking():
@@ -221,21 +202,21 @@ def booking():
         checkOutDate = request.form.get('checkOutDate')
         hotel_name = hotel_name
         
-        in_year = int(checkInDate[:4])
-        in_month = int(checkInDate[5:7])
-        in_day = int(checkInDate[8:])
-        out_year = int(checkOutDate[:4])
-        out_month = int(checkOutDate[5:7])
-        out_day = int(checkOutDate[8:])
-        
-        # check_in_date=datetime.date(int(checkInDate[:4]),int(checkInDate[5:7]), int(checkInDate[8:])), check_out_date=datetime.date(int(checkOutDate[:4]), int(checkOutDate[5:7]), int(checkOutDate[8:]))
-        if checkInDate is None or checkOutDate is None:
+        if checkInDate is 'mm/dd/yyyy' or checkOutDate is 'mm/dd/yyyy':
             flash('Enter valid dates.')
         else:
+            in_year = int(checkInDate[:4])
+            in_month = int(checkInDate[5:7])
+            in_day = int(checkInDate[8:])
+            out_year = int(checkOutDate[:4])
+            out_month = int(checkOutDate[5:7])
+            out_day = int(checkOutDate[8:])
+            
             new_booking = Booking(check_in_date=datetime.date(in_year,in_month,in_day), check_out_date=datetime.date(out_year,out_month,out_day), hotel_name=hotel_name, user_id=current_user.id)
             db.session.add(new_booking)
             db.session.commit()
             flash('Booking successful')
+            return redirect(url_for('views.profile'))
     
     return render_template("booking.html", user=current_user, value=value, hotel_name=hotel_name, hotel_location=hotel_location, room_type=room_type, price=price)
 
@@ -266,12 +247,6 @@ def get_room_type(room_id):
 def get_room_price(room_id):
     price = Room.query.filter_by(id=room_id).first().price
     return price
-
-
-
-
-
-
 
 # profile page
 @views.route('/profile')

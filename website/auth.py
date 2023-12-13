@@ -20,7 +20,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):     # checks if the password entered matches the hashed password...
-                # flash('Logged in successfully!', category='success')
+                flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.profile'))
             else:
@@ -34,7 +34,8 @@ def login():
 @login_required         # user cannot access this page unless they are logged in 
 def logout():
     logout_user()
-    return redirect(url_for('views.home'))
+    flash('Logged out successfully', category='success')
+    return redirect(url_for('auth.login'))
 
 # sign up page
 @auth.route('/sign-up', methods=['GET', 'POST'])
@@ -67,7 +68,4 @@ def sign_up():
             
             return redirect(url_for('views.profile'))      # redirects the user to the home page after successfully signing up
             
-        
-    
     return render_template("sign_up.html", user=current_user)
-
