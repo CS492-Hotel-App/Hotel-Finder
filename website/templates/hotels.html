@@ -62,15 +62,20 @@
 
         <h1 id="hotelPageTitle">Hotels</h1>
 
+        <!-- Container to disaply list of hotels -->
         <div class="hotelList">
             <ul class="list-group list-group-flush" id="hotels">
                 {% set count = namespace(value=0) %}        <!-- created count variable to increment the images -->
                 {% for hotel in hotels %}
                 <li class="list-group-item">
+
+                    <!-- Create Hotel cards -->
                     <div class="hotelCard">
                         <div class="hotelImage">
                             <img src={{ hotel_images[count.value] }} alt="Image Placeholder">
                         </div>
+
+                        <!-- Pull information for specific hotels in list -->
                         <div class="hotelDetails">
                             <h3>
                                 <a href="/rooms">
@@ -96,11 +101,7 @@
 
 </main>
 
-    <script>
-        let text = document.lastModified;
-        document.getElementById("lastMod").innerHTML = text;
-    </script>
-
+    <!-- Scripting for connection with backend -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

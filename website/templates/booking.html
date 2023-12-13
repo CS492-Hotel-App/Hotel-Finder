@@ -57,12 +57,17 @@
         </nav>
 
         <div class="container">
+
+            <!-- Booking display box -->
             <div class="formContent">
             <form method="POST">
                 <h1 class="text-center bookingTitle">Booking for...</h1>
+
+                <!-- Display selected Hotel and Room type -->
                 <h1 class="text-center"><span id="bookingHotel">{{hotel_name}}</span> in <span id="bookingCity">{{hotel_location}}</span>.</h1>
                 <h3 class="text-center">Price for the {{room_type}} room is ${{price}} per night.</h3>
                 
+                <!-- Display selected dates for booking -->
                 <div class="form-group booking">
                     <label for="fromDate">From:</label>
                     <input type="date" class="form-control" id="checkInDate" name="checkInDate" placeholder="From..." />
@@ -72,6 +77,8 @@
                     <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" placeholder="To..." />
                 </div>
                 <br/>
+
+                <!-- Submit button -->
                 <button type="submit" class="btn btn-primary">Book Now!</button>
             </form>
         </div>
@@ -82,7 +89,8 @@
         </footer>
 
     </main>
-
+    
+    <!-- Scripting for connection with backend -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

@@ -17,7 +17,7 @@
         {% if messages %}
         {% for category, message in messages %}
         {% if category == 'error' %}
-        <div class="alert alert-danger alter-dismissable fade show" role="alert">    
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
             {{message}}
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span>
@@ -59,24 +59,29 @@
         <div class="container profile">
             <h1 class="pageTitle">Profile</h1>
             <div class="content">
-                <h3>Hello, {{user.name}}</h3>
-                <p id="booking-desc">Here is your profile page where you can view your current bookings and make changes as necessary.</p>
 
+                <!-- Add introduction with specific user name from profile and desc of page -->
+                <h3>Hello, {{user.name}}</h3>
+                <p id="booking-desc">Here is your profile page where you can view your current bookings and make changes
+                    as necessary.</p>
+
+                <!-- Display list of current and previous bookings -->
                 <h2 id="current-bookings">Current bookings: </h2>
                 <div class="profile-list">
-                <ul class="list-group list-group-flush" id="bookings">
-                {% for booking in bookings %}
-                <li class="profileBookings">
-                <h3>{{booking.hotel_name}}</h3>
-                <h4>Check In Date: {{booking.check_in_date}}</h4>
-                <h4>Check Out Date: {{booking.check_out_date}}</h4>
-                <button type="button" class="cancelBtn" onClick="removeBooking({{booking.id}})">    <!-- Call JS function to remove booking -->
-                    <span aria-hidden="true">Cancel Booking</span>
-                </button>
-                </li>
-                {% endfor %}
-                </ul>
-            </div>
+                    <ul class="list-group list-group-flush" id="bookings">
+                        {% for booking in bookings %}
+                        <li class="profileBookings">
+                            <h3>{{booking.hotel_name}}</h3>
+                            <h4>Check In Date: {{booking.check_in_date}}</h4>
+                            <h4>Check Out Date: {{booking.check_out_date}}</h4>
+                            <button type="button" class="cancelBtn" onClick="removeBooking({{booking.id}})">
+                                <!-- Call JS function to remove booking -->
+                                <span aria-hidden="true">Cancel Booking</span>
+                            </button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
 
         </div>
@@ -87,6 +92,7 @@
 
     </main>
 
+    <!-- Scripting for connection with backend -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

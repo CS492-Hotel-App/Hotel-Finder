@@ -60,13 +60,17 @@
 
         <div class="container rooms">
             <h1 class="text-center">Rooms</h1>
-            <h1> {{ hotel_name }} </h1>
+            <h1> {{ hotel_name }} </h1>\
+            
+            <!-- Create list of cards with room information from specific hotels -->
             <div class="room-list">
                 <ul class="list-group list-group-flush" id="rooms">
                     {% set count = namespace(value=0) %}
                     {% for room in rooms %}
                     <li class="list-group-item">
                         <div class="room-card">
+
+                            <!-- Pull details for the cards from database -->
                             <div class="room-details">
                                 <h3>Room Type: {{ room.room_type }}</h3>
                                 <p>Price: ${{ room.price }}</p>
@@ -90,6 +94,8 @@
                                     {% endif %}
                                 </p>
                             </div>
+
+                            <!-- Check if room is available and display accordingly -->
                             <div class="room-action">
                                 {% if room.availability == 'Yes' %}
                                 <button type="button" class="btn btn-primary" onClick="sendRoomToBooking({{room.id}})">Book Room </button>
@@ -111,6 +117,7 @@
         </footer>
     </main>
 
+    <!-- Scripting for connection with backend -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

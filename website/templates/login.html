@@ -59,42 +59,13 @@
         <!-- LogIn/SignUp form -->
         <div class="container">
 
-            <!--
-        <div class="formBox">
-            <h1 id="signuptitle">Log In</h1>
-            <form method="POST" action="">
-                <div class="btn-field">
-                    <button type="button" id="signinBtn">Log In</button>
-                    <button type="button" class="disable" id="signupBtn">Sign up</button>
-                </div>
-                <div class="input-group">
-                    <div class="input-field" id="nameField">
-                        <i class="fa-regular fa-user"></i>
-                        <input id="name" name="name" type="text" placeholder="Name">
-                    </div>
-
-                    <div class="input-field">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input id="email" name="email" type="email" placeholder="Email" required>
-                    </div>
-
-                    <div class="input-field">
-                        <i class="fa-solid fa-lock"></i>
-                        <input id="password" name="password" type="password" placeholder="Password" required>
-                    </div>
-
-                    <div class="passSubContainer">
-                        <p id="passwordClick">Lost Password <a href="#">Click Here!</a></p>
-                        <input id="subBtn" type="submit">
-                    </div>
-                </div>
-
-            </form>
-        </div> -->
+            <!-- Display form/background for login page -->
             <div class="formContent">
             <form method="POST">
                 <h1 class="formTitle">Login</h1>
                 <div class="form-group">
+
+                    <!-- Input fields for login -->
                     <label for="email">Email Address:</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" />
                 </div>
@@ -104,14 +75,14 @@
                         placeholder="Enter Password" />
                 </div>
                 <br />
+
+                <!-- Submit Button -->
                 <div id="loginButton">
                 <button type="submit" class="btn btn-primary">Login</button>
             </div>
             </form>
         </div>
     </div>
-
-
 
         <!-- Added footer with Team Members -->
         <footer>
@@ -120,6 +91,7 @@
 
     </main>
 
+    <!-- Scripting for connection with backend -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -133,95 +105,6 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
 
-    <script>
-        // Sticky NavBar
-
-        window.onscroll = function () { myFunction() };
-
-        var navbar = document.getElementById("navbar");
-        var sticky = navbar.offsetTop;
-
-        function myFunction() {
-            if (window.pageYOffset >= sticky) {
-                navbar.classList.add("sticky")
-            } else {
-                navbar.classList.remove("sticky");
-            }
-        }
-
-        // Last Modified in Footer
-
-        let text = document.lastModified;
-        document.getElementById("lastMod").innerHTML = text;
-    </script>
-
-    <!--
-    <script>
-
-        let signupBtn = document.getElementById("signupBtn");
-        let signinBtn = document.getElementById("signinBtn");
-        let nameField = document.getElementById("nameField");
-        let title = document.getElementById("signuptitle");
-        let formBox = document.querySelector(".formBox");
-        let subBtn = document.getElementById("subBtn");
-        let name = document.getElementById("name");
-
-        //Make sign up button hide name field
-        signinBtn.onclick = function () {
-            nameField.style.maxHeight = "0";
-            formBox.style.padding = "50px 60px 0px";
-            title.innerHTML = "Log In";
-            signupBtn.classList.add("disable");
-            signinBtn.classList.remove("disable");
-
-
-        }
-
-        //Makes name field not required when loging in
-        signinBtn.addEventListener('click', function () {
-            name.removeAttribute('required');
-
-        });
-
-
-
-        signupBtn.onclick = function () {
-            nameField.style.maxHeight = "65px";
-            formBox.style.padding = "50px 60px 55px";
-            title.innerHTML = "Sign Up";
-            signupBtn.classList.remove("disable");
-            signinBtn.classList.add("disable");
-
-        }
-
-        signupBtn.addEventListener('click', function () {
-            name.setAttribute('required', 'required');
-        });
-
-        function toggleReqName(required) {
-            name.required = required;
-        }
-
-        // Sticky NavBar
-
-        window.onscroll = function () { myFunction() };
-
-        var navbar = document.getElementById("navbar");
-        var sticky = navbar.offsetTop;
-
-        function myFunction() {
-            if (window.pageYOffset >= sticky) {
-                navbar.classList.add("sticky")
-            } else {
-                navbar.classList.remove("sticky");
-            }
-        }
-
-        // Last Modified in Footer
-
-        let text = document.lastModified;
-        document.getElementById("lastMod").innerHTML = text;
-    </script> -->
 </body>
 
 </html>
