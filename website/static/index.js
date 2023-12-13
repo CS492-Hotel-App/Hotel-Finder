@@ -36,3 +36,14 @@ function removeBooking(bookingId) {
         window.location.href="/profile"
     })
 }
+
+// Function to make alert disappear after a set amount of time
+
+var elems = document.getElementsByClassName('alert');
+
+setTimeout(() => {
+    for (var i = 0; i < elems.length; i++ ) {
+        elems[i].style.display = "none";
+    }
+
+}, 1500) 

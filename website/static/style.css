@@ -131,6 +131,17 @@ footer p {
     background-color: #2980b9;
 }
 
+/* Alert */
+
+.alert {
+    position: absolute;
+    top: 200px; 
+    margin: auto;
+    width: 80%;
+    color: red;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 /* Index Page formatting */
 
 .index {
